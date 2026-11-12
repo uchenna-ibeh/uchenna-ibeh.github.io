@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uchenna Ibeh Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: a clinical "case file" — narrow reading column, mono metadata rail on the left of each entry */
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --ink: #14202b;
+  --muted: #56636f;
+  --line: #d9dfe5;
+  --accent: #1f5f8b;
+  --accent-soft: #e3eef6;
+  --mint: #2f7d6d;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f151b;
+    --surface: #161e26;
+    --ink: #e6ecf1;
+    --muted: #9aa8b4;
+    --line: #2a3540;
+    --accent: #7fb6dd;
+    --accent-soft: #1b2b38;
+    --mint: #74c2b0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f151b;
+  --surface: #161e26;
+  --ink: #e6ecf1;
+  --muted: #9aa8b4;
+  --line: #2a3540;
+  --accent: #7fb6dd;
+  --accent-soft: #1b2b38;
+  --mint: #74c2b0;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+/* Top bar */
+.top {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+.top .wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap;
+}
+.mark { font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em; color: var(--muted); }
+.mark b { color: var(--ink); font-weight: 500; }
+nav { display: flex; gap: 20px; flex-wrap: wrap; }
+nav a { font-size: 14px; color: var(--muted); text-decoration: none; }
+nav a:hover { color: var(--accent); }
+
+/* Hero */
+.hero { padding: 64px 0 48px; }
+.hero .eyebrow { font-family: var(--font-mono); font-size: 13px; color: var(--mint); letter-spacing: .05em; text-transform: uppercase; }
+.hero h1 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(44px, 7vw, 76px); line-height: 1.02; margin: 14px 0 22px;
+}
+.hero h1 em { color: var(--accent); }
+.hero p.lead { font-size: 19px; max-width: 62ch; color: var(--ink); margin: 0 0 26px; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  font-family: var(--font-mono); font-size: 12.5px;
+  border: 1px solid var(--line); background: var(--surface);
+  padding: 5px 11px; border-radius: 999px; color: var(--muted);
+}
+.chip.on { border-color: var(--mint); color: var(--mint); }
+
+/* Sections */
+section { padding: 52px 0; border-top: 1px solid var(--line); }
+.sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 30px; flex-wrap: wrap; }
+.sec-head .num { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+.sec-head h2 { font-family: var(--font-display); font-weight: 400; font-size: 38px; line-height: 1.1; }
+.sec-head p { flex-basis: 100%; margin: 6px 0 0; color: var(--muted); max-width: 62ch; }
+
+/* Looking for */
+.seek { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+.seek div { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; }
+.seek h3 { font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 8px; }
+.seek p { margin: 0; font-size: 15.5px; }
+
+/* Experience case files */
+.case {
+  display: grid; grid-template-columns: 200px 1fr; gap: 32px;
+  padding: 30px 0; border-top: 1px dashed var(--line);
+}
+.case:first-of-type { border-top: 0; padding-top: 0; }
+.case aside { font-family: var(--font-mono); font-size: 13px; color: var(--muted); line-height: 1.7; }
+.case aside .id { color: var(--accent); font-weight: 500; display: block; margin-bottom: 6px; }
+.case h3 { font-family: var(--font-display); font-weight: 400; font-size: 30px; line-height: 1.15; }
+.case .role { font-weight: 600; margin: 4px 0 14px; }
+.case .ctx { color: var(--muted); max-width: 64ch; margin: 0 0 18px; }
+.case ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 66ch; }
+.case li { padding-left: 18px; position: relative; }
+.case li::before { content: ""; position: absolute; left: 0; top: .72em; width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+.case li strong { font-weight: 600; }
+
+/* Projects */
+.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+.proj {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+  padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 10px;
+}
+.proj.feature { grid-column: 1 / -1; border-left: 3px solid var(--accent); }
+.proj .tag { font-family: var(--font-mono); font-size: 12px; color: var(--mint); text-transform: uppercase; letter-spacing: .06em; }
+.proj h3 { font-size: 19px; font-weight: 600; line-height: 1.3; }
+.proj p { margin: 0; color: var(--muted); font-size: 15.5px; }
+.proj .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+.proj .stack span { font-family: var(--font-mono); font-size: 11.5px; background: var(--accent-soft); color: var(--accent); padding: 3px 8px; border-radius: 3px; }
+
+/* Education & skills */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+.edu-item { margin-bottom: 22px; }
+.edu-item h3 { font-size: 18px; font-weight: 600; }
+.edu-item .when { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+.edu-item p { margin: 6px 0 0; color: var(--muted); max-width: 60ch; }
+.skills dt { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-top: 16px; }
+.skills dt:first-child { margin-top: 0; }
+.skills dd { margin: 4px 0 0; }
+
+/* Contact */
+.contact { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 30px; display: grid; gap: 18px; }
+.contact p { margin: 0; max-width: 62ch; }
+.contact .links { display: flex; flex-wrap: wrap; gap: 12px 28px; font-family: var(--font-mono); font-size: 14px; }
+footer { padding: 30px 0 50px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+
+@media (max-width: 720px) {
+  .case { grid-template-columns: 1fr; gap: 10px; }
+  .two { grid-template-columns: 1fr; }
+  .hero { padding-top: 44px; }
+  nav { gap: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="mark"><b>Uchenna J. Ibeh</b> · Product &amp; Operations</div>
+    <nav aria-label="Sections">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Product · Product Operations · Technical Projects</div>
+    <h1>Turning problems into <em>working</em> tools and products.</h1>
+    <p class="lead">I like figuring out why something isn't working and then building the fix. At Carl Zeiss Meditec, that meant dashboards and automations for the service team. At Siemens Healthineers, I got to see how product decisions are made up close. Outside of work, I build small AI and no-code tools. I studied Health Informatics and I'm now finishing my Master's in Global Public Health.</p>
+    <div class="meta">
+      <span class="chip on">Open to opportunities</span>
+      <span class="chip">Based in Munich · open across Germany</span>
+      <span class="chip">English · German (B1)</span>
+    </div>
+  </div>
+
+  <section id="looking">
+    <div class="sec-head"><span class="num">01</span><h2>What I'm looking for</h2></div>
+    <div class="seek">
+      <div><h3>Areas</h3><p>Product Management, Product Operations, Technical Project Coordination, and related project, program, operations and customer-facing roles.</p></div>
+      <div><h3>Sectors</h3><p>Open across industries, from technology and software to consulting, medtech and beyond.</p></div>
+      <div><h3>Location</h3><p>Germany: Munich or any other city, on-site, hybrid or remote.</p></div>
+      <div><h3>Best fit</h3><p>Teams that value structured problem-solving, data and automation, and close work with stakeholders.</p></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head"><span class="num">02</span><h2>Experience</h2><p>Product, service and project work at two large German technology companies.</p></div>
+
+    <article class="case">
+      <aside><span class="id">Carl Zeiss Meditec AG</span>Munich<br>Dec 2023 – May 2025<br>1.5 years, alongside studies</aside>
+      <div>
+        <h3>Smart Service</h3>
+        <div class="role">Technical Product Support Trainee</div>
+        <p class="ctx">The Smart Service department supports Zeiss Meditec's connected medical devices in the field. I worked on the tools and processes the service team used to monitor devices, spot problems and organise their work.</p>
+        <ul>
+          <li><strong>Service reporting and visibility.</strong> Designed and built a Power BI dashboard that brought device error data into one view, so the team could see which errors were recurring and decide what to tackle first.</li>
+          <li><strong>Connected-device monitoring.</strong> Designed a workflow that detects when a device loses its cloud connection and automatically triggers follow-up actions, so disconnections were handled systematically.</li>
+          <li><strong>Process automation.</strong> Found repetitive manual tasks in the team's day-to-day work and automated them with Power Automate, Microsoft Forms and Teams, cutting manual effort and making requests easier to track.</li>
+          <li><strong>Team operations.</strong> Coordinated the service team's on-call schedules to keep coverage reliable.</li>
+          <li><strong>How I worked.</strong> Gathered requirements from colleagues, built and tested solutions, and helped the team adopt them: the full cycle from problem to working tool.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="case">
+      <aside><span class="id">Siemens Healthineers</span>Erlangen<br>Aug 2022 – Jan 2023</aside>
+      <div>
+        <h3>Medical Imaging</h3>
+        <div class="role">Product Management Fellow</div>
+        <p class="ctx">I worked in medical imaging, one of the most regulated and technically complex areas of medtech, where I saw how products move from technology research to defined product requirements.</p>
+        <ul>
+          <li><strong>Head PET System project.</strong> Contributed to a project developing a PET imaging system dedicated to the head, and received an internal award nomination from the project lead for my contribution.</li>
+          <li><strong>Technology research.</strong> Wrote my Bachelor's thesis, <em>Disruptive Technologies in the Future of Sensing</em>, in collaboration with Siemens Healthineers, researching emerging sensing technologies and their potential impact on future medical products.</li>
+          <li><strong>Product exposure.</strong> Worked alongside product and R&amp;D colleagues and learned how product decisions are made in a large, regulated medtech organisation.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="case">
+      <aside><span class="id">Leb Bunt e.V.</span>Non-profit<br>Nov 2021 – Feb 2022</aside>
+      <div>
+        <h3>Communications</h3>
+        <div class="role">Social Media Intern</div>
+        <ul>
+          <li><strong>Fundraising strategy.</strong> Researched and developed social media strategies to support the organisation's fundraising campaigns.</li>
+          <li><strong>Content planning.</strong> Planned content across channels, researched topics and built a social media calendar to keep publishing consistent.</li>
+          <li><strong>Workflow improvement.</strong> Reviewed and optimised the team's social media workflows and processes.</li>
+          <li><strong>Recognition.</strong> My reference letter singles out my contribution to "Das Hallo Projekt" for particular praise.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head"><span class="num">03</span><h2>Projects</h2><p>Things I've built and researched on my own, mostly at the intersection of AI, automation and product work.</p></div>
+    <div class="projects">
+      <div class="proj feature">
+        <span class="tag">AI · Product Management</span>
+        <h3>AI PRD Review Skill</h3>
+        <p>An AI tool that reviews product requirement documents for the blind spots PMs often miss in their own drafts: solutions disguised as problems, vague trade-offs and weak success metrics. It deliberately critiques and never rewrites, so the product manager stays in control of every decision. Built with an evaluation to measure how well it catches real gaps.</p>
+        <div class="stack"><span>Claude Skills</span><span>LLM evaluation</span><span>PRDs</span></div>
+      </div>
+      <div class="proj">
+        <span class="tag">Generative AI · No-code</span>
+        <h3>AI Learning Content Studio</h3>
+        <p>A no-code workflow that uses generative AI to produce learning content, from input brief to structured material.</p>
+        <p><a href="https://github.com/uchenna-ibeh/ailearningcontentstudio">View on GitHub</a></p>
+        <div class="stack"><span>Make</span><span>Gen AI</span></div>
+      </div>
+      <div class="proj">
+        <span class="tag">Operations · Automation</span>
+        <h3>AI Operations Assistant</h3>
+        <p>A prototype that categorises and summarises issue records and suggests follow-up actions, cutting the manual triage work an operations team does every day.</p>
+        <div class="stack"><span>Make</span><span>Google Sheets</span><span>AI prompts</span></div>
+      </div>
+      <div class="proj">
+        <span class="tag">Public health · Research</span>
+        <h3>Diagnostic delay in endometriosis</h3>
+        <p>My Master's thesis examines what drives diagnostic delay in endometriosis care pathways across European health systems, and proposes a pathway performance framework to measure and reduce it.</p>
+        <div class="stack"><span>Literature review</span><span>Care pathways</span></div>
+      </div>
+      <div class="proj">
+        <span class="tag">Health education · Content</span>
+        <h3>HealthiAii</h3>
+        <p>A YouTube channel explaining general healthcare and anatomy through AI-generated video. Launched November 2026.</p>
+        <div class="stack"><span>AI video</span><span>Health literacy</span></div>
+      </div>
+      <div class="proj">
+        <span class="tag">Medtech · Venture</span>
+        <h3>CerviAlign</h3>
+        <p>An early-stage medtech startup idea in women's health.</p>
+        <div class="stack"><span>In development</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="sec-head"><span class="num">04</span><h2>Education &amp; skills</h2></div>
+    <div class="two">
+      <div>
+        <div class="edu-item">
+          <h3>Master's in Global Public Health</h3>
+          <div class="when">Deggendorf Institute of Technology · expected Mar 2027</div>
+          <p>Thesis on determinants of diagnostic delay in endometriosis care pathways.</p>
+        </div>
+        <div class="edu-item">
+          <h3>B.Sc. Health Informatics</h3>
+          <div class="when">Deggendorf Institute of Technology</div>
+          <p>Thesis with Siemens Healthineers: <em>Disruptive Technologies in the Future of Sensing</em>.</p>
+        </div>
+      </div>
+      <dl class="skills">
+        <dt>Product &amp; project</dt><dd>Requirements and PRDs, stakeholder coordination, process automation, KPI dashboards</dd>
+        <dt>Tools</dt><dd>Power BI, Power Automate, Microsoft 365, Make, Google Sheets, generative AI tools</dd>
+        <dt>Industry exposure</dt><dd>Medtech, service operations, data and automation, public health</dd>
+        <dt>Languages</dt><dd>English (fluent), German (B1)</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="sec-head"><span class="num">05</span><h2>Get in touch</h2></div>
+    <div class="contact">
+      <p>I'm always happy to talk about product, operations, technology and open roles, or to share a CV tailored to a specific opening.</p>
+      <div class="links">
+        <span>Email: <a href="mailto:jennaibeh@gmail.com">jennaibeh@gmail.com</a></span>
+        <a href="https://www.linkedin.com/in/uchennaibeh/">linkedin.com/in/uchennaibeh</a>
+        <a href="https://github.com/uchenna-ibeh">github.com/uchenna-ibeh</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer><div class="wrap">Uchenna Jennifer Ibeh · Munich, Germany</div></footer>
+
+</body>
+</html>
